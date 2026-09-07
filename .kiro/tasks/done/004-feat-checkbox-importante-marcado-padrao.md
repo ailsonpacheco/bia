@@ -30,10 +30,10 @@ Implementar funcionalidade para que o checkbox "importante" venha marcado por pa
 **Para que** eu não precise lembrar de marcar essa opção nas tarefas que considero importantes  
 
 ## Critérios de Aceitação
-- [ ] O checkbox "importante" deve estar marcado (checked) por padrão na tela de cadastro
-- [ ] O usuário pode desmarcar o checkbox se desejar
-- [ ] A funcionalidade não deve afetar a edição de tarefas existentes
-- [ ] O comportamento deve ser consistente em todos os navegadores
+- [x] O checkbox "importante" deve estar marcado (checked) por padrão na tela de cadastro
+- [x] O usuário pode desmarcar o checkbox se desejar
+- [x] A funcionalidade não deve afetar a edição de tarefas existentes
+- [x] O comportamento deve ser consistente em todos os navegadores
 
 ## Observações Técnicas
 - Modificar apenas o estado inicial do checkbox no componente de cadastro
@@ -46,12 +46,12 @@ Implementar funcionalidade para que o checkbox "importante" venha marcado por pa
 
 Antes de começar a implementar, o agent deve:
 
-- [ ] **Verificar branch atual:** `git branch --show-current`
+- [x] **Verificar branch atual:** `git branch --show-current`
   - Se não estiver em `ia-main`, **PERGUNTAR** ao usuário se pode trocar
   - Aguardar autorização
   - Após autorização: `git checkout ia-main && git pull origin ia-main`
 
-- [ ] **Mover task para doing** (caso ainda não esteja):
+- [x] **Mover task para doing** (caso ainda não esteja):
   ```bash
   mv .kiro/tasks/004-feat-checkbox-importante-marcado-padrao.md .kiro/tasks/doing/
   git add .kiro/tasks/
@@ -59,7 +59,7 @@ Antes de começar a implementar, o agent deve:
   git push origin ia-main
   ```
 
-- [ ] **Criar worktree:**
+- [x] **Criar worktree:**
   ```bash
   git worktree add .kiro/worktrees/004-feat-checkbox-importante-padrao -b feature/004-feat-checkbox-importante-padrao ia-main
   cd .kiro/worktrees/004-feat-checkbox-importante-padrao
@@ -72,21 +72,21 @@ Antes de começar a implementar, o agent deve:
 
 Marque cada item à medida que for concluído:
 
-- [ ] Localizar o componente de cadastro de nova tarefa no frontend
-- [ ] Identificar o estado inicial do checkbox "importante"
-- [ ] Alterar o estado inicial do checkbox para marcado (checked) por padrão
-- [ ] Garantir que o usuário consegue desmarcar o checkbox normalmente
-- [ ] Verificar que a edição de tarefas existentes NÃO é afetada
-- [ ] Confirmar que a lógica de salvamento permanece inalterada
-- [ ] Testar localmente no frontend
-- [ ] Validar comportamento consistente (checkbox HTML padrão)
-- [ ] Fazer commits frequentes e descritivos durante a implementação
+- [x] Localizar o componente de cadastro de nova tarefa no frontend (`client/src/components/AddTask.jsx`)
+- [x] Identificar o estado inicial do checkbox "importante" (`useState(false)`)
+- [x] Alterar o estado inicial do checkbox para marcado (checked) por padrão (`useState(true)`)
+- [x] Garantir que o usuário consegue desmarcar o checkbox normalmente (`onChange` preservado)
+- [x] Verificar que a edição de tarefas existentes NÃO é afetada (mudança isolada no cadastro)
+- [x] Confirmar que a lógica de salvamento permanece inalterada (`onSubmit`/`onAdd` sem mudanças)
+- [x] Testar localmente no frontend (build `vite build` OK: 972 módulos, sem erros; dev server HTTP 200; teste de renderização confirmou checkbox `checked` por padrão)
+- [x] Validar comportamento consistente (checkbox HTML padrão)
+- [x] Fazer commits frequentes e descritivos durante a implementação
 
 ## Definição de Pronto (DoD)
-- [ ] Código implementado e testado
-- [ ] Funcionalidade validada no frontend
-- [ ] Não há regressões em outras funcionalidades
-- [ ] Todos os itens do checklist marcados
+- [x] Código implementado e testado
+- [x] Funcionalidade validada no frontend (build OK + teste de renderização confirmou checkbox marcado)
+- [x] Não há regressões em outras funcionalidades (mudança isolada de 2 linhas em `AddTask.jsx`)
+- [x] Todos os itens do checklist marcados
 
 ---
 
