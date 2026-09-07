@@ -111,24 +111,24 @@ No componente `client/src/components/Version.jsx`, o card **"Status da API"** (e
 - Observação: a ordem das linhas pode ser ajustada para Status → Versão → URL → Última verificação (hoje o código mostra Versão → Status → Última verificação; reordenar conforme acima).
 
 ### Critérios de Aceitação do Ajuste
-- [ ] O card "Status da API" exibe as linhas Status, Versão, URL e Última verificação (nessa ordem) no estado de sucesso
-- [ ] A linha **URL** mostra o valor de `apiUrl` também no estado de sucesso
-- [ ] O botão "🔗 Abrir /api/versao" continua presente e funcional
-- [ ] Não há reintrodução dos cards de Ambiente/Frontend
-- [ ] Build do client (`npm run build`) sem erros
-- [ ] Navegação para `/versao` testada localmente
+- [x] O card "Status da API" exibe as linhas Status, Versão, URL e Última verificação (nessa ordem) no estado de sucesso
+- [x] A linha **URL** mostra o valor de `apiUrl` também no estado de sucesso
+- [x] O botão "🔗 Abrir /api/versao" continua presente e funcional
+- [x] Não há reintrodução dos cards de Ambiente/Frontend
+- [x] Build do client (`npm run build`) sem erros (validado pelo PO: `✓ built in 12.84s`)
+- [x] Navegação para `/versao` testada localmente
 
 ### Checklist de Implementação (dev)
-- [ ] Editar `client/src/components/Version.jsx` conforme especificado
-- [ ] Rodar `npm run build` no client e validar
-- [ ] Testar a rota `/versao` (via `npm run dev` ou rebuild docker no worktree)
-- [ ] Commit descritivo no branch `feature/005-feat-simplificar-tela-versao`
-- [ ] Push e notificar o PO
+- [x] Editar `client/src/components/Version.jsx` conforme especificado (commit `43f1a6c`)
+- [x] Rodar `npm run build` no client e validar
+- [x] Testar a rota `/versao` (via `npm run dev` ou rebuild docker no worktree)
+- [x] Commit descritivo no branch `feature/005-feat-simplificar-tela-versao`
+- [x] Push e notificar o PO
 
 ### Definição de Pronto (Ajuste)
-- [ ] Ajuste implementado e testado
-- [ ] Todos os critérios de aceitação do ajuste marcados
-- [ ] PO revisa e reencerra a task
+- [x] Ajuste implementado e testado
+- [x] Todos os critérios de aceitação do ajuste marcados
+- [x] PO revisa e reencerra a task (revisão em 2026-09-07: código conforme spec, build OK, lockfiles removidos do branch)
 
 ---
 
