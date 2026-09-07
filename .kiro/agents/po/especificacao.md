@@ -10,7 +10,6 @@ Onde:
 - [feat] é o tipo da tarefa (pode ser feat, fix, test)
 - [resumo] é um resumo curto da tarefa, separado por hífens
 
-
 # Sobre a task que vai ser criada
 - No início da task, você precisa colocar informações importantes sobre o nosso modelo de trabalho. 
 Vamos adotar um modelo feature/branch com **worktrees isolados**, ou seja, cada task terá o seu branch E seu próprio worktree. O branch deverá ter o nome da task e SEMPRE derivar do branch ia-main. Ao criar a task, você precisa especificar qual agent deve iniciar ela.
@@ -21,7 +20,6 @@ Vamos adotar um modelo feature/branch com **worktrees isolados**, ou seja, cada 
       -  devops (.kiro/agents/devops.json)
       -  qa (.kiro/agents/qa)
       -  po (.kiro/agents/po.json)
-
 
 ## Workflow de Worktree (OBRIGATÓRIO)
 - **Padrão adotado:** Claude/Codex pattern - worktrees dentro do projeto
