@@ -24,16 +24,8 @@
     "file://README.md",
     "file://.kiro/rules/**/*.md"
   ],
-  "hooks": [],
+  "hooks": {},
   "toolsSettings": {},
-  "includeMcpJson": true,
-  "model": "auto",
-  "permissions": {
-    "rules": [
-      {
-        "capability": "fs_read",
-        "effect": "allow"
-      }
-    ]
-  }
+  "useLegacyMcpJson": true,
+  "model": "auto"
 }

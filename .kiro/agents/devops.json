@@ -27,16 +27,8 @@
     "file://README.md",
     "file://.kiro/rules/**/*.md"
   ],
-  "hooks": [],
+  "hooks": {},
   "toolsSettings": {},
-  "includeMcpJson": true,
-  "model": "claude-sonnet-4.5",
-  "permissions": {
-    "rules": [
-      {
-        "capability": "fs_read",
-        "effect": "allow"
-      }
-    ]
-  }
+  "useLegacyMcpJson": true,
+  "model": "claude-sonnet-4.5"
 }

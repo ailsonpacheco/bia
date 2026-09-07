@@ -22,24 +22,8 @@
     "file://.kiro/rules/**/*.md",
     "file://.kiro/agents/dev/**/*.md"
   ],
-  "hooks": [],
+  "hooks": {},
   "toolsSettings": {},
-  "includeMcpJson": true,
-  "model": "claude-sonnet-4.5",
-  "permissions": {
-    "rules": [
-      {
-        "capability": "fs_read",
-        "effect": "allow"
-      },
-      {
-        "capability": "fs_write",
-        "effect": "allow"
-      },
-      {
-        "capability": "shell",
-        "effect": "allow"
-      }
-    ]
-  }
+  "useLegacyMcpJson": true,
+  "model": "claude-sonnet-4.5"
 }

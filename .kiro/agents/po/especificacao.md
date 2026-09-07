@@ -14,6 +14,14 @@ Onde:
 # Sobre a task que vai ser criada
 - No início da task, você precisa colocar informações importantes sobre o nosso modelo de trabalho. 
 Vamos adotar um modelo feature/branch com **worktrees isolados**, ou seja, cada task terá o seu branch E seu próprio worktree. O branch deverá ter o nome da task e SEMPRE derivar do branch ia-main. Ao criar a task, você precisa especificar qual agent deve iniciar ela.
+- O agent que iniciar, deverá inicialmente verificar se estamos no branch ia-main. Caso não esteja, deve informar e perguntar se podemos retornar para ele, antes de iniciar a task.
+- Após ser autorizado, ele deverá mover a task para doing, fazer commit e puch e push no branch ia-main e criar o branch para iniciar a implementação.
+- Você deverá delegar a atividade para inicio de um desses agentes: 
+      -  dev (.kiro/agents/dev.json)
+      -  devops (.kiro/agents/devops.json)
+      -  qa (.kiro/agents/qa)
+      -  po (.kiro/agents/po.json)
+
 
 ## Workflow de Worktree (OBRIGATÓRIO)
 - **Padrão adotado:** Claude/Codex pattern - worktrees dentro do projeto
