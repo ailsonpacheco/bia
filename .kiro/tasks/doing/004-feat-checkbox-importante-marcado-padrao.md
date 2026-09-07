@@ -16,15 +16,15 @@ Implementar funcionalidade para que o checkbox "importante" venha marcado por pa
 **Para que** eu não precise lembrar de marcar essa opção nas tarefas que considero importantes  
 
 ## Critérios de Aceitação
-- [ ] O checkbox "importante" deve estar marcado (checked) por padrão na tela de cadastro
-- [ ] O usuário pode desmarcar o checkbox se desejar
-- [ ] A funcionalidade não deve afetar a edição de tarefas existentes
-- [ ] O comportamento deve ser consistente em todos os navegadores
+- [x] O checkbox "importante" deve estar marcado (checked) por padrão na tela de cadastro
+- [x] O usuário pode desmarcar o checkbox se desejar
+- [x] A funcionalidade não deve afetar a edição de tarefas existentes
+- [x] O comportamento deve ser consistente em todos os navegadores
 
 ## Definição de Pronto
-- [ ] Código implementado e testado
-- [ ] Funcionalidade validada no frontend
-- [ ] Não há regressões em outras funcionalidades
+- [x] Código implementado e testado
+- [x] Funcionalidade validada no frontend
+- [x] Não há regressões em outras funcionalidades
 
 ## Observações Técnicas
 - Modificar apenas o estado inicial do checkbox no componente de cadastro
