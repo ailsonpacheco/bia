@@ -44,14 +44,14 @@ Adicionar uma barra de navegação horizontal no `Header`, posicionada **logo ab
 - O projeto já usa `react-router-dom` (usar `NavLink` para marcar o item ativo).
 
 ## Critérios de Aceitação
-- [ ] Existe um menu de navegação horizontal **abaixo do título** "BIA 2026" no Header
-- [ ] O menu contém os itens **na ordem**: Tarefas, Versão, Sobre
-- [ ] Tarefas navega para `/`, Versão para `/versao`, Sobre para `/about`
-- [ ] Os itens seguem a **mesma distribuição/estilo** entre si (consistência visual)
-- [ ] O item da rota atual é destacado como ativo (usar `NavLink` + classe `active`)
-- [ ] O layout permanece responsivo (mobile: menu não quebra o cabeçalho)
-- [ ] Os acessos existentes (ícone de status e link "Sobre a BIA" no Footer) **continuam funcionando** (não remover)
-- [ ] Não há regressão nas rotas ou no restante do Header (botão de tema, VersionInfo)
+- [x] Existe um menu de navegação horizontal **abaixo do título** "BIA 2026" no Header
+- [x] O menu contém os itens **na ordem**: Tarefas, Versão, Sobre
+- [x] Tarefas navega para `/`, Versão para `/versao`, Sobre para `/about`
+- [x] Os itens seguem a **mesma distribuição/estilo** entre si (consistência visual)
+- [x] O item da rota atual é destacado como ativo (usar `NavLink` + classe `active`)
+- [x] O layout permanece responsivo (mobile: menu não quebra o cabeçalho)
+- [x] Os acessos existentes (ícone de status e link "Sobre a BIA" no Footer) **continuam funcionando** (não remover)
+- [x] Não há regressão nas rotas ou no restante do Header (botão de tema, VersionInfo)
 
 ## Observações Técnicas
 - Reaproveitar as classes CSS já existentes `.header-content` e `.header-nav`.
@@ -80,11 +80,11 @@ Adicionar uma barra de navegação horizontal no `Header`, posicionada **logo ab
 
 Antes de começar a implementar, o agent deve:
 
-- [ ] **Verificar branch atual:** `git branch --show-current`
+- [x] **Verificar branch atual:** `git branch --show-current`
   - Se não estiver em `ia-main`, **PERGUNTAR** ao usuário se pode trocar
   - Aguardar autorização
 
-- [ ] **Mover task para doing** (caso ainda não esteja):
+- [x] **Mover task para doing** (caso ainda não esteja):
   ```bash
   # (esta task já é criada diretamente em doing/)
   git add .kiro/tasks/
@@ -92,7 +92,7 @@ Antes de começar a implementar, o agent deve:
   git push fork ia-main
   ```
 
-- [ ] **Criar worktree:**
+- [x] **Criar worktree:**
   ```bash
   git worktree add .kiro/worktrees/008-feat-menu-navegacao-header -b feature/008-feat-menu-navegacao-header ia-main
   cd .kiro/worktrees/008-feat-menu-navegacao-header
@@ -103,15 +103,15 @@ Antes de começar a implementar, o agent deve:
 
 ## 📋 CHECKLIST DE IMPLEMENTAÇÃO (dev)
 
-- [ ] Importar `NavLink` de `react-router-dom` no `Header.jsx`
-- [ ] Envolver o `<h1>` em `.header-content` e adicionar `<nav className="header-nav">` abaixo do título
-- [ ] Adicionar os itens Tarefas (`/`, com `end`), Versão (`/versao`), Sobre (`/about`)
-- [ ] Estilizar `.header-nav a` e o estado `.active` no `index.css` (consistência entre itens)
-- [ ] Garantir responsividade (validar em largura mobile)
-- [ ] Confirmar que VersionInfo, botão de tema e link do Footer continuam funcionando
-- [ ] Rodar `npm run build` no client e validar sem erros
-- [ ] Testar navegação localmente (`npm run dev`) nas três rotas
-- [ ] **Rebuild Docker no worktree** (OBRIGATÓRIO, mesmo processo da task 004):
+- [x] Importar `NavLink` de `react-router-dom` no `Header.jsx`
+- [x] Envolver o `<h1>` em `.header-content` e adicionar `<nav className="header-nav">` abaixo do título
+- [x] Adicionar os itens Tarefas (`/`, com `end`), Versão (`/versao`), Sobre (`/about`)
+- [x] Estilizar `.header-nav a` e o estado `.active` no `index.css` (consistência entre itens)
+- [x] Garantir responsividade (validar em largura mobile)
+- [x] Confirmar que VersionInfo, botão de tema e link do Footer continuam funcionando
+- [x] Rodar `npm run build` no client e validar sem erros
+- [x] Testar navegação localmente (`npm run dev`) nas três rotas
+- [x] **Rebuild Docker no worktree** (OBRIGATÓRIO, mesmo processo da task 004):
   ```bash
   # a partir da RAIZ do worktree 008
   docker compose down
@@ -119,13 +119,13 @@ Antes de começar a implementar, o agent deve:
   docker compose up -d
   # testar em http://localhost:3001  (menu Tarefas/Versão/Sobre no topo)
   ```
-- [ ] Fazer commits frequentes e descritivos
+- [x] Fazer commits frequentes e descritivos
 
 ## Definição de Pronto (DoD)
-- [ ] Código implementado e testado
-- [ ] Menu visível abaixo do título com Tarefas/Versão/Sobre funcionando
-- [ ] Layout responsivo, sem regressões
-- [ ] Todos os itens do checklist marcados
+- [x] Código implementado e testado
+- [x] Menu visível abaixo do título com Tarefas/Versão/Sobre funcionando
+- [x] Layout responsivo, sem regressões
+- [x] Todos os itens do checklist marcados
 
 ---
 
@@ -200,3 +200,14 @@ git branch -d feature/008-feat-menu-navegacao-header
 - [Worktree Workflow](.kiro/docs/worktree-workflow.md)
 - [Worktree Steering](.kiro/docs/worktree-steering.md)
 - [Task Template](.kiro/docs/task-template-with-worktree.md)
+
+---
+
+## 🎯 Encerramento pelo PO (2026-09-07)
+- Código revisado: `Header.jsx` com menu `NavLink` (Tarefas/Versão/Sobre), `.header-content` e `.header-nav`; `index.css` com estilos e estado `.active`. VersionInfo, botão de tema e Footer preservados.
+- Build validado: `✓ built in 8.30s`, sem erros.
+- Execução em Docker validada anteriormente (porta 3001): menu visível abaixo do título.
+- Branch `feature/008-feat-menu-navegacao-header` recriado a partir do `ia-main` atual e limpo (apenas `Header.jsx` + `index.css`; lockfiles e arquivos de task defasados removidos). Force-push realizado (commit `cc68a6c`).
+- Task movida para `done/`.
+
+## Status: ✅ TASK ENCERRADA PELO PO
