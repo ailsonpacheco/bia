@@ -129,3 +129,63 @@ No componente `client/src/components/Version.jsx`, o card **"Status da API"** (e
 - [ ] Ajuste implementado e testado
 - [ ] Todos os critérios de aceitação do ajuste marcados
 - [ ] PO revisa e reencerra a task
+
+---
+
+## ⚙️ FLUXO PADRONIZADO (IGUAL À TASK 004) — repositório `ailsonpacheco/bia`, remote `fork`
+
+> **Importante:** todo push é para o remote **`fork`** (`ailsonpacheco/bia`). Não usar `origin`.
+
+### Início (dev)
+- [ ] `git branch --show-current` — se não estiver em `ia-main`, PERGUNTAR ao PO antes de trocar
+- [ ] Reutilizar worktree existente:
+  ```bash
+  cd .kiro/worktrees/005-feat-simplificar-tela-versao
+  git branch --show-current   # deve ser: feature/005-feat-simplificar-tela-versao
+  ```
+
+### Implementação (dev)
+- [ ] Aplicar o ajuste no `Version.jsx` (adicionar linha URL, ordem Status → Versão → URL → Última verificação)
+- [ ] `cd client && npm run build` (validar sem erros)
+- [ ] **Rebuild Docker no worktree** (OBRIGATÓRIO, mesmo processo da 004):
+  ```bash
+  # a partir da RAIZ do worktree 005
+  docker compose down
+  docker compose build server
+  docker compose up -d
+  # testar em http://localhost:3001  (rota /versao)
+  ```
+- [ ] Commits frequentes e descritivos
+
+### Finalização (dev)
+```bash
+cd .kiro/worktrees/005-feat-simplificar-tela-versao
+git add .
+git commit -m "feat: adiciona URL no card Status da API (ajuste task 005)"
+git push -u fork feature/005-feat-simplificar-tela-versao
+cd ../../..
+```
+**NOTIFICAR O PO** e **NÃO remover o worktree** (só o PO faz isso após o merge).
+
+### Encerramento (PO)
+```bash
+# mover task para done
+mv .kiro/tasks/doing/005-feat-simplificar-tela-versao.md .kiro/tasks/done/
+git checkout ia-main
+git add .kiro/tasks/
+git commit -m "move: task 005 para done"
+git push fork ia-main
+
+# abrir PR contra ia-main no repositorio do PO
+cd .kiro/worktrees/005-feat-simplificar-tela-versao
+gh pr create --repo ailsonpacheco/bia --base ia-main \
+  --head feature/005-feat-simplificar-tela-versao \
+  --title "005: Simplificar tela /versao + URL no Status da API" \
+  --body "Closes task 005"
+
+# apos merge (squash + delete branch): limpeza
+cd ../../..
+git worktree remove .kiro/worktrees/005-feat-simplificar-tela-versao
+git worktree prune
+git branch -d feature/005-feat-simplificar-tela-versao
+```

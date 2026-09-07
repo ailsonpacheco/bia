@@ -111,6 +111,14 @@ Antes de começar a implementar, o agent deve:
 - [ ] Confirmar que VersionInfo, botão de tema e link do Footer continuam funcionando
 - [ ] Rodar `npm run build` no client e validar sem erros
 - [ ] Testar navegação localmente (`npm run dev`) nas três rotas
+- [ ] **Rebuild Docker no worktree** (OBRIGATÓRIO, mesmo processo da task 004):
+  ```bash
+  # a partir da RAIZ do worktree 008
+  docker compose down
+  docker compose build server
+  docker compose up -d
+  # testar em http://localhost:3001  (menu Tarefas/Versão/Sobre no topo)
+  ```
 - [ ] Fazer commits frequentes e descritivos
 
 ## Definição de Pronto (DoD)
