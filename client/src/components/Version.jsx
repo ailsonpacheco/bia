@@ -9,63 +9,6 @@ const Version = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
-  const getEnvironmentInfo = () => {
-    const { protocol, hostname, port } = window.location;
-    
-    // Detectar tipo de ambiente
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      return {
-        type: 'local',
-        icon: '🏠',
-        label: 'Desenvolvimento Local',
-        description: `${hostname}:${port}`,
-        color: '#3b82f6' // azul
-      };
-    }
-    
-    // IP direto sem HTTPS
-    if (/^\d+\.\d+\.\d+\.\d+$/.test(hostname) && protocol === 'http:') {
-      return {
-        type: 'ip-http',
-        icon: '🌐',
-        label: 'Acesso via IP (HTTP)',
-        description: `${hostname}${port ? ':' + port : ''}`,
-        color: '#f59e0b' // amarelo/laranja
-      };
-    }
-    
-    // ALB/Load Balancer sem HTTPS
-    if (protocol === 'http:' && hostname.includes('.elb.')) {
-      return {
-        type: 'alb-http',
-        icon: '⚖️',
-        label: 'Application Load Balancer (HTTP)',
-        description: hostname,
-        color: '#ef4444' // vermelho
-      };
-    }
-    
-    // Domínio com HTTPS (produção)
-    if (protocol === 'https:') {
-      return {
-        type: 'domain-https',
-        icon: '🔒',
-        label: 'Produção (HTTPS)',
-        description: hostname,
-        color: '#22c55e' // verde
-      };
-    }
-    
-    // Outros casos
-    return {
-      type: 'other',
-      icon: '❓',
-      label: 'Ambiente Desconhecido',
-      description: `${hostname}${port ? ':' + port : ''}`,
-      color: '#6b7280' // cinza
-    };
-  };
-
   const fetchVersionInfo = async () => {
     setLoading(true);
     setError(null);
@@ -96,8 +39,7 @@ const Version = () => {
       setApiData({
         version: data,
         status: 'online',
-        timestamp: new Date().toLocaleString(),
-        environment: getEnvironmentInfo()
+        timestamp: new Date().toLocaleString()
       });
       
       addLog('SUCCESS', 'Versão carregada', `API respondeu: ${data}`);
@@ -126,7 +68,7 @@ const Version = () => {
   return (
     <div className="version-page">
       <div className="version-header">
-        <h2>📋 Informações da Aplicação</h2>
+        <h2>📋 Status da API</h2>
         <button 
           className="refresh-btn"
           onClick={handleRefresh}
@@ -173,41 +115,6 @@ const Version = () => {
                 </button>
               </div>
             )}
-          </div>
-        </div>
-
-        {/* Card de Ambiente */}
-        {!loading && !error && apiData && (
-          <div className="version-card">
-            <div className="card-header">
-              <h3>{apiData.environment.icon} Ambiente</h3>
-              <span 
-                className="env-badge"
-                style={{ backgroundColor: apiData.environment.color }}
-              >
-                {apiData.environment.label}
-              </span>
-            </div>
-            
-            <div className="card-content">
-              <p><strong>Tipo:</strong> {apiData.environment.label}</p>
-              <p><strong>Localização:</strong> {apiData.environment.description}</p>
-              <p><strong>Protocolo:</strong> {window.location.protocol.replace(':', '').toUpperCase()}</p>
-              <p><strong>URL da API:</strong> {apiUrl}</p>
-            </div>
-          </div>
-        )}
-
-        {/* Card de Informações do Frontend */}
-        <div className="version-card">
-          <div className="card-header">
-            <h3>⚛️ Frontend</h3>
-          </div>
-          
-          <div className="card-content">
-            <p><strong>Framework:</strong> React + Vite</p>
-            <p><strong>Origem:</strong> {window.location.origin}</p>
-            <p><strong>User Agent:</strong> {navigator.userAgent.split(' ').slice(0, 3).join(' ')}...</p>
           </div>
         </div>
       </div>
