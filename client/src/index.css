@@ -137,6 +137,44 @@ body {
   color: var(--text-primary);
 }
 
+.header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.header-nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.header-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.header-nav a:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+.header-nav a.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .theme-controls {
   display: flex;
   align-items: center;
