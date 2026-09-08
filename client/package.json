@@ -24,7 +24,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "server": "json-server --watch db.json --port 5000"
+    "server": "json-server --watch db.json --port 5000",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run"
   },
   "eslintConfig": {
     "extends": [
@@ -48,9 +51,12 @@
     "@tailwindcss/postcss": "^4.3.3",
     "@types/react-datepicker": "^6.2.0",
     "@vitejs/plugin-react": "^4.5.2",
+    "@vitest/ui": "^4.1.11",
     "autoprefixer": "^10.5.4",
+    "jsdom": "^29.1.1",
     "postcss": "^8.5.23",
     "tailwindcss": "^4.3.3",
-    "vite": "^5.4.19"
+    "vite": "^5.4.19",
+    "vitest": "^4.1.11"
   }
 }
