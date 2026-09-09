@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "../contexts/ThemeContext.jsx";
 import VersionInfo from "./VersionInfo";
@@ -8,7 +9,14 @@ const Header = ({ title }) => {
   
   return (
     <header className="header">
-      <h1>{title}</h1>
+      <div className="header-content">
+        <h1>{title}</h1>
+        <nav className="header-nav">
+          <NavLink to="/" end>Tarefas</NavLink>
+          <NavLink to="/versao">Versão</NavLink>
+          <NavLink to="/about">Sobre</NavLink>
+        </nav>
+      </div>
       <div className="header-controls">
         <VersionInfo />
         <button 

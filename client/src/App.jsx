@@ -6,18 +6,15 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Tasks from "./components/Tasks.jsx";
 import AddTask from "./components/AddTask.jsx";
-import Modal from "./components/Modal.jsx";
 import About from "./components/About.jsx";
+import Version from "./components/Version.jsx";
 import DebugLogs from "./components/DebugLogs.jsx";
+import Analytics from "./components/Analytics.jsx";
 
 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 function AppContent() {
   const [tasks, setTasks] = useState([]);
-  const [fromCache, setFromCache] = useState(false);
-  const [cacheTTL, setCacheTTL] = useState(null);
-  const [cacheError, setCacheError] = useState(false);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { logApiRequest, logApiResponse, logApiError, addLog } = useLog();
 
   useEffect(() => {
@@ -28,17 +25,10 @@ function AppContent() {
   const getTasks = async () => {
     try {
       const response = await fetchTasks();
-      if (response.data) {
-        setTasks(response.data);
-        setFromCache(response.fromCache);
-        setCacheTTL(response.cacheTTL);
-        setCacheError(response.cacheError || false);
-      } else {
-        setTasks(response);
-        setFromCache(false);
-        setCacheTTL(null);
-        setCacheError(false);
-      }
+      // A API pode responder um array direto ou um envelope { data: [...] }
+      // (com metadados de cache/dbTime). Normaliza para sempre usar um array.
+      const tasksFromServer = Array.isArray(response) ? response : (response?.data ?? []);
+      setTasks(tasksFromServer);
     } catch (error) {
       addLog('ERROR', 'Falha ao carregar tarefas', error.message);
     }
@@ -150,34 +140,11 @@ function AppContent() {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
       
-      setTasks([...tasks, data]);
+      setTasks((prev) => [...(Array.isArray(prev) ? prev : []), data]);
       addLog('SUCCESS', 'Tarefa criada', `"${task.titulo}" adicionada com sucesso`);
     } catch (error) {
       logApiError('POST', url, error);
       addLog('ERROR', 'Falha ao criar tarefa', error.message);
-    }
-  };
-
-  //Remover todas as tarefas
-  const confirmDeleteAll = () => setShowConfirmModal(true);
-
-  const deleteAllTasks = async () => {
-    setShowConfirmModal(false);
-    const url = `${apiUrl}/api/tarefas`;
-    logApiRequest('DELETE', url);
-
-    try {
-      const res = await fetch(url, { method: "DELETE" });
-      logApiResponse('DELETE', url, res.status);
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-
-      setTasks([]);
-      addLog('SUCCESS', 'Todas as tarefas removidas');
-      getTasks();
-    } catch (error) {
-      logApiError('DELETE', url, error);
-      addLog('ERROR', 'Falha ao excluir todas as tarefas', error.message);
     }
   };
 
@@ -209,15 +176,24 @@ function AppContent() {
   const HomePage = () => (
     <>
       <AddTask onAdd={addTask} />
+
+      {/* Card de acesso rápido ao Analytics */}
+      <div className="analytics-link-wrapper">
+        <a href="/analytics" className="analytics-link-card">
+          <span className="analytics-link-icon">📊</span>
+          <div className="analytics-link-text">
+            <strong>Ver Analytics</strong>
+            <span>Visualize suas tarefas por prioridade</span>
+          </div>
+          <span className="analytics-link-arrow">→</span>
+        </a>
+      </div>
+
       {tasks.length > 0 ? (
         <Tasks
           tasks={tasks}
           onDelete={deleteTask}
-          onDeleteAll={confirmDeleteAll}
           onToggle={toggleReminder}
-          fromCache={fromCache}
-          cacheTTL={cacheTTL}
-          cacheError={cacheError}
         />
       ) : (
         <div className="empty-state">
@@ -225,14 +201,6 @@ function AppContent() {
           <p>Adicione sua primeira tarefa usando o formulário acima!</p>
         </div>
       )}
-      <Modal
-        isOpen={showConfirmModal}
-        onClose={() => setShowConfirmModal(false)}
-        onConfirm={deleteAllTasks}
-        title="Limpar tudo"
-        message="Tem certeza que deseja excluir todas as tarefas?"
-        type="warning"
-      />
     </>
   );
 
@@ -245,6 +213,8 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<About />} />
+            <Route path="/versao" element={<Version />} />
+            <Route path="/analytics" element={<Analytics tasks={tasks} />} />
           </Routes>
           <Footer />
         </div>
