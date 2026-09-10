@@ -25,6 +25,25 @@ Vamos adotar um modelo feature/branch com **worktrees isolados**, ou seja, cada 
 - **Padrão adotado:** Claude/Codex pattern - worktrees dentro do projeto
 - **Localização dos worktrees:** `.kiro/worktrees/` (já está no .gitignore)
 - **Branch base:** SEMPRE `ia-main`
+- **Isolamento garantido:** O Git impede que um mesmo branch seja usado por múltiplos worktrees simultaneamente, garantindo isolamento total entre tasks
+
+### Garantia de Isolamento entre Worktrees
+O Git possui um mecanismo nativo que **impede** que um mesmo branch seja usado por múltiplos worktrees ao mesmo tempo. Isso significa:
+
+✅ **Segurança total:** Cada task trabalha em seu próprio espaço isolado
+✅ **Sem conflitos:** Impossível dois agents modificarem o mesmo branch simultaneamente
+✅ **Proteção automática:** Se tentar fazer checkout de um branch já em uso, o Git bloqueia com erro:
+```
+fatal: 'feature/XXX-tipo-resumo' is already checked out at '.kiro/worktrees/XXX-tipo-resumo'
+```
+
+**Exemplo prático testado:**
+- Worktree A usa branch `feature/010-test-a`
+- Worktree B usa branch `feature/011-test-b`
+- Se tentar `git checkout feature/011-test-b` dentro do Worktree A → **BLOQUEADO pelo Git**
+- Se tentar `git checkout feature/010-test-a` dentro do Worktree B → **BLOQUEADO pelo Git**
+
+Portanto, cada worktree é **100% isolado** e não há risco de interferência entre tasks.
 
 ### Início da Task pelo Agent
 O agent que iniciar a task deverá seguir este fluxo OBRIGATÓRIO:
@@ -184,6 +203,11 @@ Antes de começar a implementar, o agent deve:
   cd .kiro/worktrees/XXX-tipo-resumo
   git branch --show-current  # Confirmar branch correto
   ```
+
+- [ ] **Confirmar isolamento do worktree:**
+  - O worktree foi criado com sucesso
+  - O branch `feature/XXX-tipo-resumo` está isolado neste worktree
+  - Nenhum outro worktree pode fazer checkout deste branch (garantia de isolamento do Git)
 ```
 
 ### 3. Seção de Finalização (após DoD)
