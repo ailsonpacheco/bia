@@ -134,6 +134,8 @@ export default function Analytics({ tasks = [] }) {
                     data={chartData}
                     margin={{ top: 20, right: 20, left: 0, bottom: 10 }}
                     barCategoryGap="35%"
+                    animationDuration={800}
+                    animationEasing="ease-out"
                   >
                     <CartesianGrid
                       strokeDasharray="3 3"
