@@ -1175,6 +1175,64 @@ footer {
 }
 
 /* =============================================
+   Analytics Animations
+   ============================================= */
+
+/* Keyframes para animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Media query para prefer-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =============================================
    Analytics Page
    ============================================= */
 .analytics-page {
@@ -1185,10 +1243,25 @@ footer {
   min-height: 400px;
 }
 
+/* Otimização de performance para animações */
+.analytics-header,
+.analytics-card,
+.analytics-stat-card {
+  will-change: transform, opacity;
+}
+
+/* Remover will-change após animações para liberar recursos */
+.analytics-header,
+.analytics-card,
+.analytics-stat-card {
+  animation-fill-mode: both;
+}
+
 .analytics-header {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  animation: slideInDown 0.4s ease-out;
 }
 
 .analytics-title {
@@ -1209,6 +1282,7 @@ footer {
   background: var(--bg-card) !important;
   border-color: var(--border-color) !important;
   color: var(--text-primary) !important;
+  animation: slideInUp 0.5s ease-out 0.1s both;
 }
 
 .analytics-card-title {
@@ -1256,11 +1330,25 @@ footer {
 .analytics-stat-card {
   background: var(--bg-card) !important;
   border-color: var(--border-color) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  animation: scaleIn 0.4s ease-out both;
+}
+
+/* Efeito stagger - animação sequencial dos cards */
+.analytics-stat-card:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.analytics-stat-card:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.analytics-stat-card:nth-child(3) {
+  animation-delay: 0.4s;
 }
 
 .analytics-stat-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.02);
   box-shadow: var(--shadow);
 }
 
@@ -1308,6 +1396,7 @@ footer {
   text-align: center;
   padding: 3rem 1.5rem;
   gap: 0.75rem;
+  animation: fadeIn 0.6s ease-out;
 }
 
 .analytics-empty-icon {
